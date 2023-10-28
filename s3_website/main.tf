@@ -45,7 +45,8 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
 
 resource "aws_s3_bucket_policy" "allow_access" {
   bucket = aws_s3_bucket.website.id
-  policy = {
+  policy = <<EOT
+{
 "Version": "2012-10-17",
 "Statement": [
     {
@@ -56,6 +57,7 @@ resource "aws_s3_bucket_policy" "allow_access" {
         "Resource": "arn:aws:s3:::terraform-bucket-shyshakov/*"
     }
 ]}
+EOT
 }
 
 data "aws_iam_policy_document" "allow_access" {
